@@ -2,6 +2,7 @@
   "name": "robofriends",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://jonthia.github.io/robofriends",
   "dependencies": {
     "ajv": "^6.5.0",
     "gh-pages": "^1.2.0",
@@ -15,6 +16,8 @@
     "tachyons": "^4.10.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

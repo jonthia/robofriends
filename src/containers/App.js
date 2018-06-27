@@ -54,16 +54,16 @@ class App extends Component {
             return robot.name.toLowerCase().includes(searchField.toLowerCase())
             })
         // same as if robots.length === 0 but using a turnary operator
-        return isPending ?
-            <h1>Loading...</h1>:
-        (
-            <div className='tc'>
-            <Header />
-            <SearchBox searchChange={ onSearchChange } />
+        return (
+        <div className='tc'>
+        <Header />
+        <SearchBox searchChange={ onSearchChange } />
             <Scroll>
+            { isPending ? <h1>Loading...</h1> :
                 <ErrorBoundary>
                 <CardList robots={ filteredRobots }/>
                 </ErrorBoundary>
+            }
             </Scroll>
             </div>
         );
