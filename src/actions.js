@@ -4,7 +4,9 @@ import {
     REQUEST_ROBOTS_PENDING,
     REQUEST_ROBOTS_SUCCESS,
     REQUEST_ROBOTS_FAILED
- } from './constants.js'
+} from './constants.js'
+
+import { apiCall } from './api/api' ;
 
 // action to change searchfield that receives user's input
 export const setSearchField = (text) => ({
@@ -18,9 +20,8 @@ export const setSearchField = (text) => ({
 export const requestRobots = () => (dispatch) => {
     dispatch({ type: REQUEST_ROBOTS_PENDING });
     // AJAX call using fetch API  to request a JSON object
-    fetch('https://jsonplaceholder.typicode.com/users')
-    // We get a promise convert the JSON data back to a JS string
-    .then(response => response.json())
+    return apiCall('https://jsonplaceholder.typicode.com/users')
+    // We get a promise and convert the JSON data back to a JS string
     .then(data => dispatch({ type: REQUEST_ROBOTS_SUCCESS, payload: data }))
     .catch(error => dispatch({ type: REQUEST_ROBOTS_FAILED, payload: error }))
 }

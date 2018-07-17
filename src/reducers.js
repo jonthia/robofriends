@@ -36,19 +36,14 @@ const initialStateRobots = {
 // RequestRobots
 // Updates the store depending on the result of the action
 export const requestRobots = (state=initialStateRobots, action={}) => {
-    console.log('request');
     switch(action.type) {
         case REQUEST_ROBOTS_PENDING:
-            console.log('pending');
             return Object.assign({}, state, { isPending: true })
         case REQUEST_ROBOTS_SUCCESS:
-            console.log('success');
             return Object.assign({}, state, { robots: action.payload, isPending: false })
         case REQUEST_ROBOTS_FAILED:
-            console.log('failed');
             return Object.assign({}, state, { error: action.payload, isPending: false })
         default:
-            console.log('default');
             return state;
     }
 }

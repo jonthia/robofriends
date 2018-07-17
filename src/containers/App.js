@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Header from '../components/Header';
-import CardList from '../components/CardList';
-import SearchBox from '../components/SearchBox';
-import Scroll from '../components/Scroll';
-import ErrorBoundary from '../components/ErrorBoundary';
-import '../containers/App.css'; 
+import '../containers/App.css';
+import MainPage from '../components/MainPage';
 
 // Redux Step 1: Import the actions
 import { setSearchField, requestRobots } from '../actions';
@@ -28,45 +24,14 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
-        // Calls the requestRobots action, which uses a dispatch method
+        // Calls the requestRobots action, which uses the dispatch function
         onRequestRobots: () => dispatch(requestRobots())
     }
 }
 
-// Smart component with two states
 class App extends Component {
-
-    componentDidMount() {
-        this.props.onRequestRobots();
-    }
-
-    // Pass onSearchChange to the input, and notifies app when there is a change
-    // onSearchChange = (event) => {
-    //     // update this.state with what we type
-    //     this.setState({ searchfield: event.target.value })
-    // }
-    // Updates the component using props
     render () {
-        // destructure this.state
-        const { searchField, onSearchChange, robots, isPending } = this.props;
-        // filter the robots to only include matches based on the rule
-        const filteredRobots = robots.filter(robot => {
-            return robot.name.toLowerCase().includes(searchField.toLowerCase())
-            })
-        // same as if robots.length === 0 but using a turnary operator
-        return (
-        <div className='tc'>
-        <Header />
-        <SearchBox searchChange={ onSearchChange } />
-            <Scroll>
-            { isPending ? <h1>Loading...</h1> :
-                <ErrorBoundary>
-                <CardList robots={ filteredRobots }/>
-                </ErrorBoundary>
-            }
-            </Scroll>
-            </div>
-        );
+        return <MainPage { ...this.props }/>
     }
 }
 
